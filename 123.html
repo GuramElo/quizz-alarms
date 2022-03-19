@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body,html{
+width:100%;
+height:100%;
+background-color: purple;
+}
+body{
+    margin:0;
+    padding:0;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+}
+form{
+    position: absolute;
+    top:0%;
+    left:50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 40%;
+    align-content: space-around;
+    align-content: center;
+}
+form > input{
+  width:100%;
+    text-align: center;
+   margin-bottom: 8%;
+   height:30px;
+   border-radius: 10px;
+border:solid yellow 2px;
+}
+form > button{
+    margin-left: 40%;
+    margin-right: 40%;
+    height:30px;
+   border-radius: 10px;
+border:solid yellow 2px;
+}
+div{
+    background-color: blue;
+    position: absolute;
+    top:18%;
+    left:0%;
+   display: flex;
+   flex-wrap: wrap;
+}
+div > span{
+    
+    background-color: red;
+    display:block;
+    width:100px;
+    height:100px;
+ 
+    text-align: center;
+   padding:20px;
+   margin:5px;
+ position: relative;  
+}
+span > span {
+    position: absolute;
+    top:0%;
+    right:5%;
+    cursor: pointer;
+
+}
+    </style>
+</head>
+<body>
+
+
+<form onsubmit="sergo()">
+
+
+
+<input id="inpo" type="datetime-local">
+<input id="texi" type="text" placeholder="input title">
+<button type="submit">Submit</button>
+
+</form>
+<div>
+
+
+</div>
+
+
+
+<script>
+    function sergo(){
+    let a=document.querySelector("#inpo").value;
+    let b=Date.parse(a);
+    let c= new Date(a);
+    console.log(Date.parse(a),b);
+    localStorage.setItem(document.querySelector("#texi").value,JSON.stringify(a));
+    }
+function sasha(ina){
+    let inoo=document.querySelector(`.${ina}`);
+inoo.parentElement.parentElement.removeChild(inoo.parentElement);
+localStorage.removeItem(ina);
+}
+for(let ia in localStorage){
+    if(ia=="length")break;
+let nw=document.createElement("span");
+nw.append("X");
+nw.setAttribute("class", ia);
+nw.setAttribute("onclick",`sasha('${ia}')`);
+
+let aba=document.createElement("span");
+aba.append(`${ia}'s alarm : ${localStorage.getItem(ia)}`);
+aba.appendChild(nw);
+aba.setAttribute("id",ia);
+document.querySelector("div").appendChild(aba);
+    
+
+    }
+    setInterval(()=>{
+for(let ia in localStorage){
+    if(ia=="length")break;
+let one=Date.parse(new Date(JSON.parse(localStorage.getItem(ia))));
+//console.log(localStorage.getItem(ia),one);
+let two=Date.parse(new Date());
+//console.log(two, "***");
+if(one<=two){
+document.querySelector(`#${ia}`).style.backgroundColor = "green";
+}
+else {//console.log("araaa");
+//document.querySelector(`#${ia}`).style.backgroundColor = "green";
+
+}
+
+}
+
+
+},1000);
+
+    </script>
+</body>
+</html>
